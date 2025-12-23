@@ -19,7 +19,7 @@ public class Livro {
     private long id;
 
     @Column(nullable = false, unique = true)
-    private string nome;
+    private String nome;
 
     // Agora precisamo mapear o relacionamento com a tabela autor no banco de dados, e para isso usamos o mapeamento da propria entidade usando a anotacao "@ManyToOne" para dizer que este e um relacionamento muitos para um, oque indica que um livro tem apenas um autor, mas um autor pode ter varios livros
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE} )
