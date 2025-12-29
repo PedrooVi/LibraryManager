@@ -1,44 +1,82 @@
-<h2>Library API Manager</h2>
+# LibraryManager
 
-O objetivo do projeto Library API Manager é disponibilizar uma API para cadastro dos livros de uma livraria através de uma API REST.
+API REST simples para gerenciamento de **Livros e Autores**, desenvolvida com **Spring Boot**, utilizando **JPA (Hibernate)**, **DTOs**, **validações** e **MapStruct**.  
+O projeto tem como foco **aprendizado e boas práticas** na construção de APIs REST em Java.
 
-O projeto foi desenvolvido como base de criação do curso intrdutório sobre Spring Boot, publicado na Udemy em abril de 2020.
+---
 
-Durante o projeto, são abordados os seguintes tópicos:
+## Tecnologias Utilizadas
 
-* Setup inicial de projeto com o Spring Boot Initialzr.
-* Criação de modelo de dados para o mapeamento de entidades em bancos de dados.
-* Desenvolvimento de operações de gerenciamento de livros (Cadastro, leitura por ID e remoção de livros).
-* Relação de cada uma das operações acima com o padrão arquitetural REST, e a explicação de cada um dos conceitos REST envolvidos durante o desenvolvimento do projeto.
+- **Java**
+- **Spring Boot**
+- **Spring Data JPA**
+- **Hibernate**
+- **H2 Database** (banco em memória)
+- **MapStruct**
+- **Lombok**
+- **Bean Validation (Jakarta Validation)**
+
+---
+
+## 🏗 Estrutura do Projeto
+
+O projeto segue a seguinte separação em camadas:
+
+- **Controller** → recebe as requisições HTTP
+- **Service** → contém a regra de negócio
+- **Repository** → acesso ao banco de dados
+- **DTO** → transporte de dados e validação
+- **Mapper** → conversão entre DTOs e Entidades
 
 
-Para executar o projeto no terminal, digite o seguinte comando:
+---
 
-```shell script
-mvn spring-boot:run 
+##  Como Executar o Projeto
+
+### Pré-requisitos
+- Java 17+ (ou versão compatível com seu Spring Boot)
+- Maven
+
+### Passos
+```bash
+git clone https://github.com/PedrooVi/LibraryManager
+cd LibraryManager
+./mvnw spring-boot:run
+```
+A aplicação estará disponível em:
+```bash
+http://localhost:8080
 ```
 
-Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
+## Endpoints disponiveis:
 
-```
-http://localhost:8080/api/v1/books
-```
+### Criar livros:
 
-Para abrir a documentação (disponibilizada através do Swagger 2) de todas as operações implementadas com o padrão arquitetural REST, acesse o seguinte link abaixo:
+### Post ``` /api/v1/livros```
 
-```
-http://localhost:8080/api/v1/books/swagger-ui.html
-```
+Exemplo de JSON:
+````
+{
+  "nome": "Livro de teste",
+  "autor": {
+    "nome": "Pedro Vinicius",
+    "idade": 20
+  }
+}
+````
+### Buscar livros:
+### Get ``` /api/v1/livros/{id}```
 
-Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
+##  Objetivo do Projeto
 
-São necessários os seguintes pré-requisitos para a execução do projeto desenvolvido durante a aula:
+Este projeto foi criado com foco em:
 
-* Java 14 ou versões superiores.
-* Maven 3.6.3 ou versões superiores.
-* SDKMan! para o gerenciamento de múltiplcas versões de Java, Maven e Spring Boot.
-* Intellj IDEA Community Edition ou sua IDE favorita.
-* Controle de versão GIT instalado na sua máquina.
-* Swagger 2 para a documentação de todos os endpoints desenvolvidos dentro do projeto.
-* Conta no GitHub para o armazenamento do seu projeto na nuvem.
-* Postman para execução de testes de integração para a validação de ponta a ponta da API.
+- Praticar Spring Boot + JPA
+- Entender o uso de DTOs e validações
+- Aplicar MapStruct na conversão de objetos
+- Construir uma API REST bem estruturada
+
+## Autor
+### Pedro Vinicius
+[Linkedin](https://www.linkedin.com/in/pedrovinicius-dev/) |
+[GitHub](https://github.com/PedrooVi)
