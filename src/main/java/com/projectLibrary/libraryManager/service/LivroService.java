@@ -3,6 +3,7 @@ package com.projectLibrary.libraryManager.service;
 import com.projectLibrary.libraryManager.dto.LivroDTO;
 import com.projectLibrary.libraryManager.dto.MenssagemRespostaDTO;
 import com.projectLibrary.libraryManager.entity.Livro;
+import com.projectLibrary.libraryManager.exception.LivroNaoEncontradoException;
 import com.projectLibrary.libraryManager.mapper.LivroMapper;
 import com.projectLibrary.libraryManager.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,10 @@ public class LivroService {
                 .build();
     }
 
-    public LivroDTO buscarPorID(Long id) {
-        Optional <Livro> optionalLivro = livroRepository.findById(id);
-        return livroMapper.toDTO(optionalLivro.get());
+    public LivroDTO buscarPorID(Long id) throws LivroNaoEncontradoException {
+      Livro livro =  livroRepository.findById(id)
+              .orElseThrow(()-> new LivroNaoEncontradoException(id));
+
+        return livroMapper.toDTO(livro);
     }
 }

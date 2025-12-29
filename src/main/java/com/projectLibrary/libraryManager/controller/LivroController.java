@@ -3,6 +3,7 @@ package com.projectLibrary.libraryManager.controller;
 import com.projectLibrary.libraryManager.dto.LivroDTO;
 import com.projectLibrary.libraryManager.dto.MenssagemRespostaDTO;
 import com.projectLibrary.libraryManager.entity.Livro;
+import com.projectLibrary.libraryManager.exception.LivroNaoEncontradoException;
 import com.projectLibrary.libraryManager.repository.LivroRepository;
 import com.projectLibrary.libraryManager.service.LivroService;
 import jakarta.validation.Valid;
@@ -33,7 +34,7 @@ public class LivroController {
     }
 
     @GetMapping ("/{id}")
-    public LivroDTO buscarPorID(@PathVariable Long id){
+    public LivroDTO buscarPorID(@PathVariable Long id) throws LivroNaoEncontradoException {
         return  livroService.buscarPorID(id);
     }
 }
