@@ -8,17 +8,21 @@ import com.projectLibrary.libraryManager.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Optional;
+
 // Vamos utilizar a anotacao "@Service" para indicar que essa classe e um service
 // A classe service e responsvel pela regra de negocio e logica de toda a minha aplicacao. Nela devem ser atribuidos os metodos de CRUD da nossa entidade, e esse metodos serao mapeados e utilizados para requisicao na classe controller
 @Service
 public class LivroService {
     private LivroRepository livroRepository;
 
-    private final LivroMapper livroMapper = LivroMapper.INSTANCE;
+    private final LivroMapper livroMapper;
 
     @Autowired
-    public LivroService(LivroRepository livroRepository) {
+    public LivroService(LivroRepository livroRepository, LivroMapper livroMapper) {
         this.livroRepository = livroRepository;
+        this.livroMapper = livroMapper;
     }
 
     // Vamos agora criar uma classe para retornar as nossas respostas das requisicoes.
@@ -30,5 +34,10 @@ public class LivroService {
         return MenssagemRespostaDTO.builder()
                 .menssagem("livro criado com o ID: " + livroSalvo.getId())
                 .build();
+    }
+
+    public LivroDTO buscarPorID(Long id) {
+        Optional <Livro> optionalLivro = livroRepository.findById(id);
+        return livroMapper.toDTO(optionalLivro.get());
     }
 }

@@ -7,10 +7,7 @@ import com.projectLibrary.libraryManager.repository.LivroRepository;
 import com.projectLibrary.libraryManager.service.LivroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 // Vamos adicionar a anotacao "@RestController" para indicar para o spring que essa classe ira funcionar como o controller
@@ -33,5 +30,10 @@ public class LivroController {
     public MenssagemRespostaDTO create(@RequestBody @Valid LivroDTO livroDTO){
         // Para criar um livro, vamos utilizar o metodo que criamos na classe LivroService
        return livroService.create(livroDTO);
+    }
+
+    @GetMapping ("/{id}")
+    public LivroDTO buscarPorID(@PathVariable Long id){
+        return  livroService.buscarPorID(id);
     }
 }
