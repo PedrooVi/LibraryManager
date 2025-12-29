@@ -1,9 +1,11 @@
 package com.projectLibrary.libraryManager.controller;
 
+import com.projectLibrary.libraryManager.dto.LivroDTO;
 import com.projectLibrary.libraryManager.dto.MenssagemRespostaDTO;
 import com.projectLibrary.libraryManager.entity.Livro;
 import com.projectLibrary.libraryManager.repository.LivroRepository;
 import com.projectLibrary.libraryManager.service.LivroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,9 +28,10 @@ public class LivroController {
 
     // Vamos marcar esse metodo com "@PostMapping" para indicar que este e um metodo POST
     // Usamos tambem a marcacao "@RequestBody" para indicar que o objeto Livro sera passado no corpo da requisicao.
+    // Vamos usar no corpo a classe DTO que criamos, para tratar erros.
     @PostMapping
-    public MenssagemRespostaDTO create(@RequestBody Livro livro){
+    public MenssagemRespostaDTO create(@RequestBody @Valid LivroDTO livroDTO){
         // Para criar um livro, vamos utilizar o metodo que criamos na classe LivroService
-       return livroService.create(livro);
+       return livroService.create(livroDTO);
     }
 }

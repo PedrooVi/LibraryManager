@@ -27,6 +27,4 @@ public class Autor {
     @Column(nullable = false)
     private int idade;
 
-
-
 }
